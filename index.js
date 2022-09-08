@@ -1,65 +1,97 @@
-let nombre = prompt('Ingresa tu nombre')
+let saludo = prompt('¡Hola! Ingresa tu nombre')
+let bienvenida= alert('Bienvenid@ ' + saludo)
+let numero = prompt('Ingresa el número de línea que deseas pasar a Claro')
 
-let saludo = alert('¡Bienvenid@ ' + nombre + "!" )
+class Portabilidad  {
+    constructor (empresa, id,) {
+        this.empresa= empresa
+        this.id= id
+        this.abonos = [
+            {
+             empresa:'personal',
+                planes: [
+                    {
+                        gigas: 5,
+                        precio: 3400,
+                        descuento: 70
+                    },
+                    {
+                        gigas: 8,
+                        precio: 4900, 
+                        descuento: 70
+                    },
+                    {
+                        gigas: 15,
+                        precio: 6300,
+                        descuento: 70
 
-let numero= parseInt(prompt(' Ingresa el número que deseas pasar a Claro'))
+                    },
+                ],
 
-let empresa = parseInt(prompt(' Selecciona a que compañía pertenece el número ingresado: 1. Personal - 2. Movistar'))
+            },
 
-let abono = parseInt(prompt('Selecciona el abono que deseas contratar: 1. Plan de 1GB - 2. Plan de 3GB - 3. Plan de 5GB - 4. Plan de 8GB - 5. Plan de 15GB'))
+            {
+             empresa:'movistar',
+                planes: [
+                    {
+                        gigas: 5,
+                        precio: 3400,
+                        descuento: 85
+                    },
+                    {
+                        gigas: 8,
+                        precio: 4900, 
+                        descuento: 85
+                    },
+                    {
+                        gigas: 15,
+                        precio: 6300,
+                        descuento: 85
 
-let precioSinDescuento= 0
+                    },
+                ],
 
-let agregarLinea = true
+            },
 
-let decision 
-
-while (agregarLinea=== true) {
-    if (abono===1) {
-        precioSinDescuento = precioSinDescuento +  2000
-    } else if (abono===2) {
-        precioSinDescuento = precioSinDescuento +  2500  
-    }else if (abono===3) {
-        precioSinDescuento = precioSinDescuento +  3400
-    } else if (abono===4) {
-        precioSinDescuento = precioSinDescuento + 3600
-    } else if (abono===5){
-        precioSinDescuento = precioSinDescuento + 4300
-    } else {
-     abono = parseInt(prompt('Selecciona una opción correcta :1. Plan de 1GB - 2. Plan de 3GB - 3. Plan de 5GB - 4. Plan de 8GB - 5. Plan de 15GB'))
-     continue
+        ]
     }
 
-    decision = parseInt(prompt('Deseas pasar otro número? 1. Si - 2.No'))
-    if (decision===1) {
-        numero= parseInt(prompt(' Ingresa el número que deseas pasar a Claro'))
-        empresa = parseInt(prompt(' Selecciona tu compañía actual: 1. Personal - 2. Movistar'))
-        abono = parseInt(prompt('Selecciona el abono que deseas contratar: 1. Plan de 1GB - 2. Plan de 3GB - 3. Plan de 5GB - 4. Plan de 8GB - 5. Plan de 15GB'))
-    } else if (decision===2) {
-        agregarLinea = false
-    }
 }
 
+const companiaActual = []
+const personal = new Portabilidad ('personal',1)
+companiaActual.push(personal)
+const movistar = new Portabilidad ('movistar',2)
+companiaActual.push(movistar)
 
-alert ('Tu abono sin descuento es de '+precioSinDescuento)
+const seleccionEmpresa = parseInt(prompt('Ingresa tu empresa actual 1. Personal - 2.Movistar'))
 
-function calcularPrecioConDescuento (valor) {
-    let descuento = 0
-    if (empresa ===1) {
-        descuento = 70
+const findEmpresa = companiaActual.find(portabilidad=>portabilidad.id === seleccionEmpresa)
 
-    } else if (empresa ===2) {
-            descuento = 85
-    } 
+const seleccionPlan = parseInt(
+    prompt('Selecciona la cantidad de gigas que quieres en tu plan 5, 8 o 15'))
 
-    let valorDescuento = valor * (descuento/100)
-    valor = valor - valorDescuento
-    return valor
-}
+const abono = findEmpresa.abonos
 
-let valorDescuento = calcularPrecioConDescuento(precioSinDescuento)
+const precioSegunPlan= []
+ abono.forEach((abono) => {
+    const planesArray = abono.planes
+    const  planGigas = planesArray.find((plan) => plan.gigas === seleccionPlan)
+    precioSegunPlan.push({
+        nombre: abono.empresa,
+        precio: planGigas.precio,
 
-alert ('El precio final a pagar en tu factura es de '+valorDescuento)
+    })
+})
+
+console.log(precioSegunPlan)
+//let arraystring = precioSegunPlan.join(' ') para trabajar luego
+
+    
+
+
+
+
 
 
 
