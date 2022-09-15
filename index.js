@@ -1,91 +1,32 @@
-let saludo = prompt('¡Hola! Ingresa tu nombre')
-let bienvenida= alert('Bienvenid@ ' + saludo)
-let numero = prompt('Ingresa el número de línea que deseas pasar a Claro')
+const abonos = []
+const carrito = []
+const select = document.getElementById('lista')
 
-class Portabilidad  {
-    constructor (empresa, id,) {
-        this.empresa= empresa
-        this.id= id
-        this.abonos = [
-            {
-             empresa:'personal',
-                planes: [
-                    {
-                        gigas: 5,
-                        precio: 3400,
-                        descuento: 70
-                    },
-                    {
-                        gigas: 8,
-                        precio: 4900, 
-                        descuento: 70
-                    },
-                    {
-                        gigas: 15,
-                        precio: 6300,
-                        descuento: 70
+class Plan{
+    constructor(id, gigas, precio,){
+        this.id = id
+        this.gigas = gigas
+        this.precio = precio
 
-                    },
-                ],
-
-            },
-
-            {
-             empresa:'movistar',
-                planes: [
-                    {
-                        gigas: 5,
-                        precio: 3400,
-                        descuento: 85
-                    },
-                    {
-                        gigas: 8,
-                        precio: 4900, 
-                        descuento: 85
-                    },
-                    {
-                        gigas: 15,
-                        precio: 6300,
-                        descuento: 85
-
-                    },
-                ],
-
-            },
-
-        ]
-    }
-
+    } 
 }
 
-const companiaActual = []
-const personal = new Portabilidad ('personal',1)
-companiaActual.push(personal)
-const movistar = new Portabilidad ('movistar',2)
-companiaActual.push(movistar)
 
-const seleccionEmpresa = parseInt(prompt('Ingresa tu empresa actual 1. Personal - 2.Movistar'))
+let abono1 = new Plan(1, 3, 2000)
+let abono2 = new Plan(2, 5, 2500)
+let abono3 = new Plan(3, 8, 3000)
 
-const findEmpresa = companiaActual.find(portabilidad=>portabilidad.id === seleccionEmpresa)
 
-const seleccionPlan = parseInt(
-    prompt('Selecciona la cantidad de gigas que quieres en tu plan 5, 8 o 15'))
+abonos.push(abono1,abono2, abono3)
 
-const abono = findEmpresa.abonos
+console.log(abonos)
+console.log(select)
 
-const precioSegunPlan= []
- abono.forEach((abono) => {
-    const planesArray = abono.planes
-    const  planGigas = planesArray.find((plan) => plan.gigas === seleccionPlan)
-    precioSegunPlan.push({
-        nombre: abono.empresa,
-        precio: planGigas.precio,
-
-    })
+abonos.forEach((abono)=> {
+    const option = document.createElement('option')
+    option.innerText = `${abono.gigas}: $${abono.precio}`
+    select.append(option)
 })
-
-console.log(precioSegunPlan)
-//let arraystring = precioSegunPlan.join(' ') para trabajar luego
 
     
 
